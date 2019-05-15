@@ -20,11 +20,11 @@ public class MqReceiverTest extends OrderApplicationTests {
 
     @Test
     public void send() {
-        amqpTemplate.convertAndSend("myQueue", "now " + new Date());
+        amqpTemplate.convertAndSend("myQueue", "myQueue" + new Date());
     }
 
-//    @Test
-//    public void sendOrder() {
-//        amqpTemplate.convertAndSend("myOrder", "computer", "now " + new Date());
-//    }
+    @Test
+    public void sendOrder() {
+        amqpTemplate.convertAndSend("myOrder", "computer", "myOrder computer" + new Date());
+    }
 }
