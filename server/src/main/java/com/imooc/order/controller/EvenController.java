@@ -15,6 +15,9 @@ public class EvenController {
     @GetMapping("/printlnStr")
     public String printlnStr(){
         System.out.println(str);
+        System.out.println("11111111");
+        System.out.println("22222222");
+        System.out.println("-------");
         return  str;
     }
 }
