@@ -11,9 +11,8 @@
     </parent>
 
     <groupId>com.imooc</groupId>
-    <artifactId>server</artifactId>
+    <artifactId>order-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-
 
     <dependencies>
         <dependency>
@@ -65,6 +64,17 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.imooc</groupId>
+            <artifactId>product-client</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

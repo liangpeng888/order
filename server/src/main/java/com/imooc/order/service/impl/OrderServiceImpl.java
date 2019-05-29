@@ -1,10 +1,7 @@
 package com.imooc.order.service.impl;
 
-import com.imooc.order.client.ProductClient;
-import com.imooc.order.dataobject.DecreaseStockInput;
 import com.imooc.order.dataobject.OrderDetail;
 import com.imooc.order.dataobject.OrderMaster;
-import com.imooc.order.dataobject.ProductInfoOutput;
 import com.imooc.order.dto.OrderDTO;
 import com.imooc.order.enums.OrderStatusEnum;
 import com.imooc.order.enums.PayStatusEnum;
@@ -14,7 +11,9 @@ import com.imooc.order.repository.OrderDetailRepository;
 import com.imooc.order.repository.OrderMasterRepository;
 import com.imooc.order.service.OrderService;
 import com.imooc.order.utils.KeyUtil;
-
+import com.imooc.product.client.ProductClient;
+import com.imooc.product.common.DecreaseStockInput;
+import com.imooc.product.common.ProductInfoOutput;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,14 +49,14 @@ public class OrderServiceImpl implements OrderService {
     public OrderDTO create(OrderDTO orderDTO) {
         String orderId = KeyUtil.genUniqueKey();
 
-       //查询商品信息(调用商品服务)
+        //查询商品信息(调用商品服务)
         List<String> productIdList = orderDTO.getOrderDetailList().stream()
                 .map(OrderDetail::getProductId)
                 .collect(Collectors.toList());
         log.info("查询商品信息(调用商品服务)");
         List<ProductInfoOutput> productInfoList = productClient.listForOrder(productIdList);
 
-       //计算总价
+        //计算总价
         BigDecimal orderAmout = new BigDecimal(BigInteger.ZERO);
         for (OrderDetail orderDetail: orderDTO.getOrderDetailList()) {
             for (ProductInfoOutput productInfo: productInfoList) {
@@ -75,7 +74,7 @@ public class OrderServiceImpl implements OrderService {
             }
         }
 
-       //扣库存(调用商品服务)
+        //扣库存(调用商品服务)
         List<DecreaseStockInput> decreaseStockInputList = orderDTO.getOrderDetailList().stream()
                 .map(e -> new DecreaseStockInput(e.getProductId(), e.getProductQuantity()))
                 .collect(Collectors.toList());

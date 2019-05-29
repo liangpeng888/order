@@ -1,9 +1,9 @@
 package com.imooc.order.controller;
 
 
-import com.imooc.order.client.ProductClient;
-import com.imooc.order.dataobject.DecreaseStockInput;
-import com.imooc.order.dataobject.ProductInfoOutput;
+import com.imooc.product.client.ProductClient;
+import com.imooc.product.common.DecreaseStockInput;
+import com.imooc.product.common.ProductInfoOutput;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
